@@ -34,7 +34,7 @@ public class MancalaService {
     }
 
     /**
-     * Update the gamestate based on input from player
+     * Update the game state based on input from player
      *
      * @param selectedPit Selected pit by the player
      */
