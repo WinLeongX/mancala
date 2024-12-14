@@ -9,6 +9,9 @@ import java.util.stream.Stream;
 
 import static com.qsd.assignment.mancala.util.GameStateConstants.*;
 
+/**
+ * Service to calculate the pits that needs to updated
+ */
 @Service
 @RequiredArgsConstructor
 public class GameStateUpdateService {
@@ -17,6 +20,14 @@ public class GameStateUpdateService {
             MANCALA_BLUE, PLAYER_RED_PIT_6, PLAYER_RED_PIT_5, PLAYER_RED_PIT_4, PLAYER_RED_PIT_3, PLAYER_RED_PIT_2, PLAYER_RED_PIT_1,
             MANCALA_RED, PLAYER_BLUE_PIT_6, PLAYER_BLUE_PIT_5, PLAYER_BLUE_PIT_4, PLAYER_BLUE_PIT_3, PLAYER_BLUE_PIT_2, PLAYER_BLUE_PIT_1);
 
+    /**
+     * Method to calculate List of pits to update after player move
+     *
+     * @param selectedPit   Selected pit from the player move
+     * @param pebblesInHand Amount of pebbles in selected pit
+     * @param playersTurn   Flag to indicate which player is at turn
+     * @return List of pits to update
+     */
     public List<String> getPitsToUpdate(String selectedPit, Integer pebblesInHand, Integer playersTurn) {
         int startingIndex = getStartingIndex(selectedPit);
 

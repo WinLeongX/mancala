@@ -9,6 +9,9 @@ import java.util.Map;
 
 import static com.qsd.assignment.mancala.util.GameStateConstants.*;
 
+/**
+ * Service to process game rules when player makes a move
+ */
 @Service
 public class MancalaService {
 
@@ -30,6 +33,11 @@ public class MancalaService {
         loadGameBoard();
     }
 
+    /**
+     * Update the gamestate based on input from player
+     *
+     * @param selectedPit Selected pit by the player
+     */
     public void makeMove(String selectedPit) {
         Integer pebblesInHand = gameState.get(selectedPit);
         Integer playersTurn = gameState.get(PLAYERS_TURN_FLAG);
@@ -47,6 +55,9 @@ public class MancalaService {
         gameState = gameOverService.check(gameState);
     }
 
+    /**
+     * Method to reset the Mancala board
+     */
     public void resetGame() {
         loadGameBoard();
     }

@@ -6,9 +6,19 @@ import java.util.Map;
 
 import static com.qsd.assignment.mancala.util.GameStateConstants.*;
 
+/**
+ * Service to check for the opposite pit based on the last move
+ */
 @Service
 public class OppositesService {
 
+    /**
+     * Method to check the opposite pit of last move and update Mancala if condition is met
+     *
+     * @param lastMove  Last move in the pits to update
+     * @param gameState Current game state
+     * @return Updated game state post Opposite rule check
+     */
     public Map<String, Integer> calculateGameState(String lastMove, Map<String, Integer> gameState) {
         String opposite = calculateOpposite(lastMove);
         int score;

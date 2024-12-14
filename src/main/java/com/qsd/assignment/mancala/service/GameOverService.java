@@ -7,9 +7,18 @@ import java.util.Map;
 
 import static com.qsd.assignment.mancala.util.GameStateConstants.*;
 
+/**
+ * Service to check if the game is over and calculate the final score
+ */
 @Service
 public class GameOverService {
 
+    /**
+     * Method to check game over and sum up final scores
+     *
+     * @param gameState Game state after pit updates
+     * @return Game state
+     */
     public Map<String, Integer> check(Map<String, Integer> gameState) {
 
         if (calculateSum(PLAYER_BLUE_PITS, gameState) == 0 || calculateSum(PLAYER_RED_PITS, gameState) == 0) {
