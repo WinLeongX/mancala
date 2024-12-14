@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Mancala</title>
+        <link type="text/css" rel="stylesheet" href="css/mancala.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+
+    <body>
+        <div id="ui" class="ui">
+            <h1>Mancala</h1>
+            <div class="player-blue-turn" th:if="${mancalaGameState['game-over']} == 0 and ${mancalaGameState['players-turn']} == 0">
+                Player Blue's turn
+            </div>
+            <div class="player-red-turn" th:if="${mancalaGameState['game-over']} == 0 and ${mancalaGameState['players-turn']} == 1">
+                Player Red's turn
+            </div>
+            <div th:if="${mancalaGameState['game-over']} == 1">
+                Game Over
+            </div>
+            <br>
+
+            <form th:action="@{/resetGame}" method="post">
+                <button type="submit" class="btn btn-success">Start a new game</button>
+            </form>
+        </div>
+        <br>
+        <div id="board" class="board">
+            <div id="mancala_red" class="mancala-red text-center">Red Mancala
+                <div id="mancala_red_amount" class="amount"><span th:text="${mancalaGameState['mancala-red']}"></span></div>
+                <canvas id="mancala_red_canvas" class="canvas"></canvas>
+            </div>
+
+            <div id="pits" class="pits">
+                <div id="red_pit_1" class="pit">
+                    <div id="red_pit_1_amount" class="amount"><span th:text="${mancalaGameState['pit1-red']}"></span></div>
+                    <div class="text-center">
+                        <form th:action="@{/makeMove}" method="post">
+                            <button type="submit" class="btn btn-danger"
+                                    th:disabled="${mancalaGameState['players-turn'] == 0} or ${mancalaGameState['game-over']} == 1 or ${mancalaGameState['pit1-red']} == 0"
+                                    th:name="selectedPit"
+                                    th:value="pit1-red">Red Pit 1</button>
+                        </form>
+                    </div>
+                    <canvas id="canvas_0_0" class="canvas"></canvas>
+                </div>
+                <div id="red_pit_2" class="pit">
+                    <div id="red_pit_2_amount" class="amount"><span th:text="${mancalaGameState['pit2-red']}"></span></div>
+                    <div class="text-center">
+                        <form th:action="@{/makeMove}" method="post">
+                            <button type="submit" class="btn btn-danger"
+                                    th:disabled="${mancalaGameState['players-turn'] == 0} or ${mancalaGameState['game-over']} == 1 or ${mancalaGameState['pit2-red']} == 0"
+                                    th:name="selectedPit"
+                                    th:value="pit2-red">Red Pit 2</button>
+                        </form>
+                    </div>
+                    <canvas id="canvas_0_1" class="canvas"></canvas>
+                </div>
+                <div id="red_pit_3" class="pit">
+                    <div id="red_pit_3_amount" class="amount"><span th:text="${mancalaGameState['pit3-red']}"></span></div>
+                    <div class="text-center">
+                        <form th:action="@{/makeMove}" method="post">
+                            <button type="submit" class="btn btn-danger"
+                                    th:disabled="${mancalaGameState['players-turn'] == 0} or ${mancalaGameState['game-over']} == 1 or ${mancalaGameState['pit3-red']} == 0"
+                                    th:name="selectedPit"
+                                    th:value="pit3-red">Red Pit 3</button>
+                        </form>
+                    </div>
+                    <canvas id="canvas_0_2" class="canvas"></canvas>
+                </div>
+                <div id="red_pit_4" class="pit">
+                    <div id="red_pit_4_amount" class="amount"><span th:text="${mancalaGameState['pit4-red']}"></span></div>
+                    <div class="text-center">
+                        <form th:action="@{/makeMove}" method="post">
+                            <button type="submit" class="btn btn-danger"
+                                    th:disabled="${mancalaGameState['players-turn'] == 0} or ${mancalaGameState['game-over']} == 1 or ${mancalaGameState['pit4-red']} == 0"
+                                    th:name="selectedPit"
+                                    th:value="pit4-red">Red Pit 4</button>
+                        </form>
+                    </div>
+                    <canvas id="canvas_0_3" class="canvas"></canvas>
+                </div>
+                <div id="red_pit_5" class="pit">
+                    <div id="red_pit_5_amount" class="amount"><span th:text="${mancalaGameState['pit5-red']}"></span></div>
+                    <div class="text-center">
+                        <form th:action="@{/makeMove}" method="post">
+                            <button type="submit" class="btn btn-danger"
+                                    th:disabled="${mancalaGameState['players-turn'] == 0} or ${mancalaGameState['game-over']} == 1 or ${mancalaGameState['pit5-red']} == 0"
+                                    th:name="selectedPit"
+                                    th:value="pit5-red">Red Pit 5</button>
+                        </form>
+                    </div>
+                    <canvas id="canvas_0_4" class="canvas"></canvas>
+                </div>
+                <div id="red_pit_6" class="pit">
+                    <div id="red_pit_6_amount" class="amount"><span th:text="${mancalaGameState['pit6-red']}"></span></div>
+                    <div class="text-center">
+                        <form th:action="@{/makeMove}" method="post">
+                        <button type="submit" class="btn btn-danger"
+                                th:disabled="${mancalaGameState['players-turn'] == 0} or ${mancalaGameState['game-over']} == 1 or ${mancalaGameState['pit6-red']} == 0"
+                                th:name="selectedPit"
+                                th:value="pit6-red">Red Pit 6</button>
+                        </form>
+                    </div>
+                    <canvas id="canvas_0_5" class="canvas"></canvas>
+                </div>
+
+                <div id="blue_pit_6" class="pit">
+                    <div id="blue_pit_6_amount" class="amount"><span th:text="${mancalaGameState['pit6-blue']}"></span></div>
+                    <div class="text-center">
+                        <form th:action="@{/makeMove}" method="post">
+                            <button type="submit" class="btn btn-primary"
+                                    th:disabled="${mancalaGameState['players-turn'] == 1} or ${mancalaGameState['game-over']} == 1 or ${mancalaGameState['pit6-blue']} == 0"
+                                    th:name="selectedPit"
+                                    th:value="pit6-blue">Blue Pit 6</button>
+                        </form>
+                    </div>
+                    <canvas id="canvas_b6" class="canvas"></canvas>
+                </div>
+                <div id="blue_pit_5" class="pit">
+                    <div id="blue_pit_5_amount" class="amount"><span th:text="${mancalaGameState['pit5-blue']}"></span></div>
+                    <div class="text-center">
+                        <form th:action="@{/makeMove}" method="post">
+                            <button type="submit" class="btn btn-primary"
+                                    th:disabled="${mancalaGameState['players-turn'] == 1} or ${mancalaGameState['game-over']} == 1 or ${mancalaGameState['pit5-blue']} == 0"
+                                    th:name="selectedPit"
+                                    th:value="pit5-blue">Blue Pit 5</button>
+                        </form>
+                    </div>
+                    <canvas id="canvas_1_4" class="canvas"></canvas>
+                </div>
+                <div id="blue_pit_4" class="pit">
+                    <div id="blue_pit_4_amount" class="amount"><span th:text="${mancalaGameState['pit4-blue']}"></span></div>
+                    <div class="text-center">
+                        <form th:action="@{/makeMove}" method="post">
+                            <button type="submit" class="btn btn-primary"
+                                    th:disabled="${mancalaGameState['players-turn'] == 1} or ${mancalaGameState['game-over']} == 1 or ${mancalaGameState['pit4-blue']} == 0"
+                                    th:name="selectedPit"
+                                    th:value="pit4-blue">Blue Pit 4</button>
+                        </form>
+                    </div>
+                    <canvas id="canvas_1_3" class="canvas"></canvas>
+                </div>
+                <div id="blue_pit_3" class="pit">
+                    <div id="blue_pit_3_amount" class="amount"><span th:text="${mancalaGameState['pit3-blue']}"></span></div>
+                    <div class="text-center">
+                        <form th:action="@{/makeMove}" method="post">
+                            <button type="submit" class="btn btn-primary"
+                                    th:disabled="${mancalaGameState['players-turn'] == 1} or ${mancalaGameState['game-over']} == 1 or ${mancalaGameState['pit3-blue']} == 0"
+                                    th:name="selectedPit"
+                                    th:value="pit3-blue">Blue Pit 3</button>
+                        </form>
+                    </div>
+                    <canvas id="canvas_1_2" class="canvas"></canvas>
+                </div>
+                <div id="blue_pit_2" class="pit">
+                    <div id="blue_pit_2_amount" class="amount"><span th:text="${mancalaGameState['pit2-blue']}"></span></div>
+                    <div class="text-center">
+                        <form th:action="@{/makeMove}" method="post">
+                            <button type="submit" class="btn btn-primary"
+                                    th:disabled="${mancalaGameState['players-turn'] == 1} or ${mancalaGameState['game-over']} == 1 or ${mancalaGameState['pit2-blue']} == 0"
+                                    th:name="selectedPit"
+                                    th:value="pit2-blue">Blue Pit 2</button>
+                        </form>
+                    </div>
+                    <canvas id="canvas_1_1" class="canvas"></canvas>
+                </div>
+                <div id="blue_pit_1" class="pit">
+                    <div id="blue_pit_1_amount" class="amount"><span th:text="${mancalaGameState['pit1-blue']}"></span></div>
+                    <div class="text-center">
+                        <form th:action="@{/makeMove}" method="POST">
+                            <button type="submit" class="btn btn-primary"
+                                    th:disabled="${mancalaGameState['players-turn'] == 1} or ${mancalaGameState['game-over']} == 1 or ${mancalaGameState['pit1-blue']} == 0"
+                                    th:name="selectedPit"
+                                    th:value="pit1-blue">Blue Pit 1</button>
+                        </form>
+                    </div>
+                    <canvas id="canvas_1_0" class="canvas"></canvas>
+                </div>
+            </div>
+
+            <div id="mancala_blue" class="mancala-blue text-center">Blue Mancala
+                    <div id="mancala_blue_amount" class="amount"><span th:text="${mancalaGameState['mancala-blue']}"></span></div>
+                    <canvas id="mancala_blue_canvas" class="canvas"></canvas>
+            </div>
+        </div>
+    </body>
+</html>
